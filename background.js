@@ -30,15 +30,13 @@ chrome.webRequest.onHeadersReceived.addListener(
     ["responseHeaders"]
 );
 
-function is_login_attempted_recently(url, recent_threshold_seconds = 30) {
+function is_login_attempted_recently(url, recent_threshold_seconds = 10) {
     // prevent infinite loop from tabs.reload()
     if (last_url !== url)
         return false;
 
-    if ((Date.now() - last_time) > recent_threshold_seconds * 1000)
-        return false;
-
-    return true;
+    const time_diff_in_millis = Date.now() - last_time
+    return time_diff_in_millis <= recent_threshold_seconds * 1000;
 }
 
 function is_session_expired(response_headers) {
