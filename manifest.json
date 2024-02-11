@@ -4,14 +4,12 @@
     "description": "Save you clicks from logging in after session expires.",
     "version": "1.0",
     "permissions": [
-        "webRequest",
-        "tabs",
         "storage"
     ],
     "content_scripts": [
         {
-            "js": ["scripts/prevent_redirect.js"],
-            "matches": ["*://web.tarc.edu.my/*"],
+            "js": ["scripts/handle_invalid_session.js"],
+            "matches": ["*://web.tarc.edu.my/portal/*"],
             "run_at": "document_start"
         }
     ],
@@ -22,6 +20,6 @@
         "service_worker": "background.js"
     },
     "host_permissions": [
-        "*://web.tarc.edu.my/*"
+        "*://web.tarc.edu.my/portal/*"
     ]
 }
