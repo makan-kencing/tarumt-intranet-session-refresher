@@ -21,19 +21,24 @@ chrome.runtime.onMessage.addListener(
             (async () => {
                 const [username, password] = await get_local_username_password();
                 if (!(username && password)) {
-                    console.log("Username and password is not filled yet.");
+                    console.error("Username and password is not filled yet.");
                     sendResponse({failed: true});
+                    return;
                 }
 
                 if (is_login_attempted_recently(sender.tab.url)) {
+                    console.log("Logged in recently. Redirecting normally.")
                     sendResponse({failed: true});
+                    return;
                 }
 
                 set_last_url(sender.tab.url);
                 try {
                     await refresh_session(username, password);
                 } catch (InvalidLogin) {
+                    console.error("Login is invalid. Please check username and password are correct.")
                     sendResponse({failed: true});
+                    return;
                 }
                 sendResponse({success: true});
             })();
