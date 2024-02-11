@@ -8,6 +8,13 @@ function set_last_url(url) {
     last_url = url;
 }
 
+class InvalidLogin extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "InvalidLogin";
+    }
+}
+
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         if (request.refresh_session) {
@@ -16,16 +23,18 @@ chrome.runtime.onMessage.addListener(
                 if (!(username && password)) {
                     console.log("Username and password is not filled yet.");
                     sendResponse({failed: true});
-                    return true;
                 }
 
                 if (is_login_attempted_recently(sender.tab.url)) {
                     sendResponse({failed: true});
-                    return true;
                 }
 
                 set_last_url(sender.tab.url);
-                await refresh_session(username, password);
+                try {
+                    await refresh_session(username, password);
+                } catch (InvalidLogin) {
+                    sendResponse({failed: true});
+                }
                 sendResponse({success: true});
             })();
 
@@ -34,7 +43,6 @@ chrome.runtime.onMessage.addListener(
     }
 )
 
-
 function is_login_attempted_recently(url, recent_threshold_seconds = 10) {
     // prevent infinite loop from tabs.reload()
     if (last_url !== url)
@@ -42,13 +50,6 @@ function is_login_attempted_recently(url, recent_threshold_seconds = 10) {
 
     const time_diff_in_millis = Date.now() - last_time
     return time_diff_in_millis <= recent_threshold_seconds * 1000;
-}
-
-class InvalidLogin extends Error {
-    constructor(message) {
-        super(message);
-        this.name = "InvalidLogin";
-    }
 }
 
 async function refresh_session(username, password){
