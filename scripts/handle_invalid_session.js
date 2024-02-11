@@ -1,7 +1,5 @@
-importScripts("scripts/refresh_session.js")
-
 new MutationObserver(
-    async (mutations, observer) => {
+    (mutations, observer) => {
     for (const mutation of mutations) {
         for (const addedNode of mutation.addedNodes) {
             if (addedNode.nodeType === 1 && addedNode.innerText.match("window.parent.location.href=")) {
@@ -10,7 +8,7 @@ new MutationObserver(
                 // We've done what we needed to do, no need for the MutationObserver anymore:
                 observer.disconnect();
 
-                clear_page();
+                window.addEventListener("load", rewrite_page);
                 request_refresh_session();
                 return;
             }
@@ -19,8 +17,8 @@ new MutationObserver(
 })
     .observe(document.documentElement, { childList: true, subtree: true });
 
-function clear_page() {
-    document.body.innerHTML = "";
+function rewrite_page() {
+    document.body.innerHTML = "Refreshing session~";
 }
 
 function request_refresh_session() {
@@ -28,8 +26,6 @@ function request_refresh_session() {
 }
 
 function handle_worker_response(response) {
-    console.log("Received response");
-    console.log(response);
     if (response.success)
         window.location.reload();
 
