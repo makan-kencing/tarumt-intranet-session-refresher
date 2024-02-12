@@ -15,11 +15,11 @@ Related stack overflow https://stackoverflow.com/questions/17280390/can-local-st
 
 ### From packed
 
-Install the latest .crx from [release](https://gitlab.com/makan-kencing/tarumt-intranet-session-refresher/-/releases) and drag it into Chrome to install.
+Install the latest .crx from [release](https://github.com/makan-kencing/tarumt-intranet-session-refresher/releases/latest) and drag it into Chrome to install.
 
 ### From source code
 
-1. Install the latest source code from [release](https://gitlab.com/makan-kencing/tarumt-intranet-session-refresher/-/releases) in .zip (or any format that you can extract), and extract it into a folder.
+1. Install the latest source code from [release](https://github.com/makan-kencing/tarumt-intranet-session-refresher/releases/latest) in .zip (or any format that you can extract), and extract it into a folder.
 2. Navigate to `chrome://extensions/` in Chrome.
    - Make sure `Developer mode` is enabled. (Top right corner)
 3. Click `Load unpacked` and select the folder with the source code.
@@ -39,7 +39,7 @@ Developing
 
 1. Clone the repository.
    ```shell
-   git clone https://gitlab.com/makan-kencing/tarumt-intranet-session-refresher.git
+   git clone https://github.com/makan-kencing/tarumt-intranet-session-refresher.git
    ```
 2. Install the extension [from source](#from-source-code).
 
