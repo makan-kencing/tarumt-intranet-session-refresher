@@ -22,12 +22,13 @@ chrome.runtime.onMessage.addListener(
                 const [username, password] = await get_local_username_password();
                 if (!(username && password)) {
                     console.error("Username and password is not filled yet.");
+                    set_last_login_status(LoginStatus.NO_CREDENTIALS);
                     sendResponse({failed: true});
                     return;
                 }
 
                 if (is_login_attempted_recently(sender.tab.url)) {
-                    console.log("Logged in recently. Redirecting normally.")
+                    console.log("Logged in recently. Probably no access to the site. Redirecting to usual place.");
                     sendResponse({failed: true});
                     return;
                 }
@@ -37,6 +38,7 @@ chrome.runtime.onMessage.addListener(
                     await refresh_session(username, password);
                 } catch (InvalidLogin) {
                     console.error("Login is invalid. Please check username and password are correct.")
+                    set_last_login_status(LoginStatus.FAILED_LOGIN);
                     sendResponse({failed: true});
                     return;
                 }
