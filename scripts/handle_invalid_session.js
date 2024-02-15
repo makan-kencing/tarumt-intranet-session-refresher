@@ -18,7 +18,32 @@ new MutationObserver(
     .observe(document.documentElement, { childList: true, subtree: true });
 
 function rewrite_page() {
-    document.body.innerHTML = "Refreshing session~";
+    document.body.innerHTML = `
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    
+        .center {
+            margin: 0;
+            padding: 0;
+            
+            display: flex; 
+            height: 100vh; 
+            width: 100vw; 
+            align-items: center; 
+            justify-content: center;       
+        }
+        .msg {
+            font-family: Roboto sans-serif;
+        }
+    </style>
+    
+    <h1 class="center msg">
+        Refreshing Session...
+    </h1>
+    `;
 }
 
 function request_refresh_session() {
