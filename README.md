@@ -3,19 +3,37 @@ TARUMT Intranet Session Refresher
 
 A **Chrome extension** to save you clicks ~~and annoyance~~ from logging in again after the session has expired.
 
+---
+
+**Note: Does* not work in incognito.*
+
+#### Without extension
+
+![invalid_session.png](.github/.meta/without_extension.gif)
+
+#### With extension
+
+![What invalid session?](.github/.meta/with_extension.gif)
+
 Installation
 ------------
 
 ### Before installing
 
-⚠️ This extension stores password as plaintext and is vulnerable to credentials stealer. Exercise caution and change your password if you have run any malicious programs. \
+⚠️ This extension stores password as plaintext in local storage and is vulnerable to credentials stealer. Exercise caution and change your password if you have run any malicious programs or extensions.
+
+Because of limitations, it is stored in local storage. If you have any suggestions feel free to [open an issue](https://github.com/makan-kencing/tarumt-intranet-session-refresher/issues/new) or [pull request](https://github.com/makan-kencing/tarumt-intranet-session-refresher/compare).
+
 Related stack overflow https://stackoverflow.com/questions/17280390/can-local-storage-ever-be-considered-secure.
 
-## Installing
+---
 
 ### From packed
 
 Install the latest .crx from [release](https://github.com/makan-kencing/tarumt-intranet-session-refresher/releases/latest) and drag it into Chrome to install.
+
+If the download is blocked, click ignore and continue anyway. If that still doesn
+t work, proceed to [install from source](#from-source-code)
 
 ### From source code
 
@@ -27,7 +45,7 @@ Install the latest .crx from [release](https://github.com/makan-kencing/tarumt-i
 Usage
 -----
 
-1. Install and enable the extension. [Installation](#installation)
+1. [Install](#installation) and enable the extension.
 2. Click on the extension icon (beside url bar) and click Intranet Session Refresher to open the menu.
 3. Fill in the username and password and save.
 4. Done.
