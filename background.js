@@ -29,6 +29,7 @@ chrome.runtime.onMessage.addListener(
 
                 if (is_login_attempted_recently(sender.tab.url)) {
                     console.log("Logged in recently. Probably no access to the site. Redirecting to usual place.");
+                    clear_login_status();
                     sendResponse({failed: true});
                     return;
                 }
@@ -42,6 +43,7 @@ chrome.runtime.onMessage.addListener(
                     sendResponse({failed: true});
                     return;
                 }
+                clear_login_status();
                 sendResponse({success: true});
             })();
 

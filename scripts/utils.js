@@ -24,7 +24,7 @@ function set_local_username_password(username, password) {
 }
 
 async function get_last_login_status() {
-    const items = await chrome.storage.local.get([Storage.LAST_LOGIN_STATUS]);
+    const items = await chrome.storage.local.get(Storage.LAST_LOGIN_STATUS);
     return items[Storage.LAST_LOGIN_STATUS];
 }
 
@@ -34,4 +34,8 @@ function set_last_login_status(login_status) {
             [Storage.LAST_LOGIN_STATUS]: login_status
         }
     )
+}
+
+function clear_login_status() {
+    chrome.storage.local.remove(Storage.LAST_LOGIN_STATUS);
 }
