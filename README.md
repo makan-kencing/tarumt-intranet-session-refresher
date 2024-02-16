@@ -5,8 +5,6 @@ A **Chrome extension** to save you clicks ~~and annoyance~~ from logging in agai
 
 ---
 
-**Note: Does* not work in incognito.*
-
 #### Without extension
 
 ![invalid_session.png](.github/.meta/without_extension.gif)
