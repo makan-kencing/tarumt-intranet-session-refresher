@@ -39,3 +39,7 @@ function set_last_login_status(login_status) {
 function clear_login_status() {
     chrome.storage.local.remove(Storage.LAST_LOGIN_STATUS);
 }
+
+function clear_storage() {
+    chrome.storage.local.clear();
+}
