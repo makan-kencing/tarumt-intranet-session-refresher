@@ -3,9 +3,16 @@
     "name": "Intranet Session Refresher",
     "description": "Save you clicks from logging in after session expires.",
     "version": "1.2.1",
+    "action": {
+        "default_popup": "popup/menu.html"
+    },
     "permissions": [
         "storage"
     ],
+    "host_permissions": [
+        "*://web.tarc.edu.my/portal/*"
+    ],
+    "incognito": "split",
     "content_scripts": [
         {
             "js": ["scripts/content_scripts/handle_invalid_session.js"],
@@ -13,14 +20,7 @@
             "run_at": "document_start"
         }
     ],
-    "action": {
-        "default_popup": "popup/menu.html"
-    },
     "background": {
         "service_worker": "background.js"
-    },
-    "host_permissions": [
-        "*://web.tarc.edu.my/portal/*"
-    ],
-    "incognito": "split"
+    }
 }
