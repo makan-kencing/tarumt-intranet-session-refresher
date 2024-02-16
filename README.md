@@ -26,12 +26,9 @@ Related stack overflow https://stackoverflow.com/questions/17280390/can-local-st
 
 ---
 
-### From packed
+### From packed (Linux only)
 
 Install the latest .crx from [release](https://github.com/makan-kencing/tarumt-intranet-session-refresher/releases/latest) and drag it into Chrome to install.
-
-If the download is blocked, click ignore and continue anyway. If that still doesn
-t work, proceed to [install from source](#from-source-code)
 
 ### From source code
 
