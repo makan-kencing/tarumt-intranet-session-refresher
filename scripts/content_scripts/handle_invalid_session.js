@@ -1,4 +1,4 @@
-const REDIRECT_RE = /window[\w.]+\.location\.href=https:(.+)/;
+const REDIRECT_RE = /window[\w.]+\.location\.href="(.+)"/;
 
 new MutationObserver(
     (mutations, observer) => {
@@ -57,6 +57,7 @@ function request_refresh_session(original_redirect_url) {
 }
 
 function handle_worker_response(response, original_redirect_url) {
+    console.log(response);
     if (response.success)
         window.location.reload();
     else if (response.failed) {
