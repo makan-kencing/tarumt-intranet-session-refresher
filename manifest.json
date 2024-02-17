@@ -17,6 +17,7 @@
         {
             "js": ["scripts/content_scripts/handle_invalid_session.js"],
             "matches": ["*://web.tarc.edu.my/portal/*"],
+            "exclude_globs": ["*://web.tarc.edu.my/portal/admintake/*"],
             "run_at": "document_start"
         }
     ],
