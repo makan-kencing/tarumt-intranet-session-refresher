@@ -13,6 +13,12 @@ A **Chrome extension** to save you clicks ~~and annoyance~~ from logging in agai
 
 ![What invalid session?](.github/.meta/with_extension.gif)
 
+Supported Sites
+---------------
+
+- https://web.tarc.edu.my/portal
+- https://reg.tarc.edu.my/portal
+
 Installation
 ------------
 
@@ -34,16 +40,16 @@ Install the latest .crx from [release](https://github.com/makan-kencing/tarumt-i
 
 1. Install the latest source code from [release](https://github.com/makan-kencing/tarumt-intranet-session-refresher/releases/latest) in .zip (or any format that you can extract), and extract it into a folder.
 2. Navigate to `chrome://extensions/` in Chrome.
-   - Make sure `Developer mode` is enabled. (Top right corner)
+   - Make sure `Developer mode` is enabled. <sup>(top right corner)</sup>
 3. Click `Load unpacked` and select the folder with the source code.
 
 Usage
 -----
 
 1. [Install](#installation) and enable the extension.
-2. Click on the extension icon (beside url bar) and click Intranet Session Refresher to open the menu.
-3. Fill in the username and password and save.
-4. Done.
+2. Click on the extension icon <sup>(beside url bar)</sup> and click `Intranet Session Refresher` to open the menu.
+3. Fill in the username and password.
+4. Save and done!
 
 Developing
 ----------
@@ -59,12 +65,11 @@ Developing
 Implementation
 --------------
 
-- The programs inject a script into TARUMT intranet webpage and checks for a response for session expiry.
-- When found, the page is blocked from redirects to the session expired page.
-- A call is made to the extension to refresh the session.
-- The session is then refreshed using the provided username and password.
-- After refreshing, the page is reloaded.
-  - If an error occurred and is not able to relog, the page is then normally redirected to the session expired page.
+- The extension inject a script to check if the page is redirecting to expired session.
+- When found, the page is blocked from redirecting.
+- Session is refreshed using the provided username and password.
+- Page is then refreshed.
+  - If the login is unsuccessful, it will then be normally redirected to the correct expired session page.
 
 Ending notes<i>?</i>
 --------------------
