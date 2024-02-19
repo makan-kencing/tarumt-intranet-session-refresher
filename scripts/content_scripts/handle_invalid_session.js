@@ -51,7 +51,8 @@ function rewrite_page() {
 
 function request_refresh_session(original_redirect_url) {
     chrome.runtime.sendMessage(
-        { refresh_session: true },
+        { refresh_session: true,
+          hostname: window.location.hostname },
         (response) => {handle_worker_response(response, original_redirect_url)}
     );
 }

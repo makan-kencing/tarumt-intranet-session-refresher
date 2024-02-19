@@ -8,6 +8,11 @@ function set_last_url(url) {
     last_url = url;
 }
 
+HOSTNAME_TO_ENDPOINT = {
+    "web.tarc.edu.my": "https://web.tarc.edu.my/portal/",
+    "reg.tarc.edu.my": "https://reg.tarc.edu.my/portal/"
+}
+
 class InvalidLogin extends Error {
     constructor(message) {
         super(message);
@@ -27,16 +32,17 @@ chrome.runtime.onMessage.addListener(
                     return;
                 }
 
-                if (is_login_attempted_recently(sender.tab.url)) {
+                if (is_login_attempted_recently(sender.url)) {
                     console.log("Logged in recently. Probably no access to the site. Redirecting to usual place.");
                     clear_login_status();
                     sendResponse({failed: true});
                     return;
                 }
 
-                set_last_url(sender.tab.url);
+                set_last_url(sender.url);
+                endpoint = HOSTNAME_TO_ENDPOINT[request.hostname];
                 try {
-                    await refresh_session(username, password);
+                    await refresh_session(endpoint, username, password);
                 } catch (InvalidLogin) {
                     console.error("Login is invalid. Please check username and password are correct.")
                     set_last_login_status(LoginStatus.FAILED_LOGIN);
@@ -61,8 +67,8 @@ function is_login_attempted_recently(url, recent_threshold_seconds = 10) {
     return time_diff_in_millis <= recent_threshold_seconds * 1000;
 }
 
-async function refresh_session(username, password){
-    let res = await fetch("https://web.tarc.edu.my/portal/loginProcess.jsp", {
+async function refresh_session(endpoint, username, password){
+    let res = await fetch(endpoint + "loginProcess.jsp", {
         method: "POST",
         body: `username=${username}&password=${encodeURI(password)}`,
         headers: {
